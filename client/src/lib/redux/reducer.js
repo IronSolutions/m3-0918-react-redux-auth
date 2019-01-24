@@ -1,8 +1,11 @@
+import { AuthAPI } from "../auth";
+import { login } from "./actions";
 
 const initialStore = {
     user: null,
     favoritePokemon: null,
-    numClicks: 0
+    numClicks: 0,
+    messages:[]
 }
 
 export const rootReducer = (store = initialStore, action) => {
@@ -24,6 +27,30 @@ export const rootReducer = (store = initialStore, action) => {
             ...store,
             favoritePokemon: null
         }
+        break;
+        case "ADD_MESSAGE":
+            store = {
+                ...store,
+                messages: [action.message]
+            }
+        break;
+        case "DELETE_ALL_MESSAGES":
+            store = {
+                ...store,
+                messages: []
+            }
+        break;
+        case "LOGIN":
+            store = {
+                ...store,
+                user: action.user
+            }
+        break;
+        case "LOGOUT":
+            store = {
+                ...store,
+                user: null
+            }
         break;
         default: return store
     }

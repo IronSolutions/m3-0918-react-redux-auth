@@ -8,6 +8,10 @@ import posed, { PoseGroup } from 'react-pose';
 import styled from '@emotion/styled';
 import { LoginPage } from './pages/login';
 import { SignupPage } from './pages/signup';
+import { Messages } from './components/Messages';
+import { connect } from 'react-redux';
+import { AuthAPI } from './lib/auth';
+import { logout } from './lib/redux/actions';
 
 const NavMenu = styled.nav`
   a{
@@ -28,15 +32,23 @@ const RouteContainer = posed.div({
   exit: { opacity: 0 }
 });
 
-const Menu = () => (
+const Menu = connect(state => ({user: state.user}))(({user, dispatch}) => (
   <NavMenu>
     <NavLink exact to="/">Home</NavLink>
     <NavLink to="/about">About</NavLink>
-    <NavLink to="/login">Login</NavLink>
-    <NavLink to="/signup">Signup</NavLink>
-    <NavLink to="/logout">Logout</NavLink>
+    {user ?
+      <React.Fragment>
+        <p>Welcome {user.username}</p>
+        <a href="#" onClick={() => AuthAPI.logout().then(() => dispatch(logout()))}>Logout</a>
+      </React.Fragment>
+    :
+      <React.Fragment>
+        <NavLink to="/login">Login</NavLink>
+        <NavLink to="/signup">Signup</NavLink>
+      </React.Fragment>
+    }
   </NavMenu>
-)
+))
 
 
 class App extends Component {
@@ -47,6 +59,7 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <h2>PokeApi Example</h2>
+          <Messages/>
           <Menu/>
           <PoseGroup>
             <RouteContainer key={location.pathname}>
