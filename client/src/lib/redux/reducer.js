@@ -1,5 +1,4 @@
 import { AuthAPI } from "../auth";
-import { login } from "./actions";
 
 const initialStore = {
     user: null,
