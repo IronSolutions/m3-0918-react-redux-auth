@@ -90,9 +90,9 @@ const authRoutes = require('./routes/auth');
 app.use('/api/auth', authRoutes);
    
 
-// app.use('*', (req,res) => {
-//   res.sendFile(path.join(__dirname,'public/index.html'));
-// });
+app.use('*', (req,res) => {
+  res.sendFile(path.join(__dirname,'public/index.html'));
+});
 
 
 module.exports = app;
