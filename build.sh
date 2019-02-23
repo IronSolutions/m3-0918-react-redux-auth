@@ -1,6 +1,6 @@
 #!/bin/bash
 rm -rf ./client/build
-rm -rf ./server/public
+rm -rf ./server/public/
 cd client
 npm install
 npm run build
