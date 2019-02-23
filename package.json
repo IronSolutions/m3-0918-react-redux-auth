@@ -6,7 +6,7 @@
     "start": "node ./server/bin/www",
     "dev": "DEBUG=server:* nodemon ./server/bin/www",
     "dev-windows": "nodemon ./server/bin/www",
-    "build":"./build.sh"
+    "heroku-postbuild":"./build.sh"
   },
   "dependencies": {
     "bcrypt": "^3.0.0",
