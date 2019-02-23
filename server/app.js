@@ -58,7 +58,7 @@ app.use(require('node-sass-middleware')({
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
+//app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
 
 
 hbs.registerHelper('ifUndefined', (value, options) => {
@@ -86,12 +86,13 @@ app.use(session({
 app.use(flash());
 require('./passport')(app);
     
-
-const index = require('./routes/index');
-app.use('/', index);
-
 const authRoutes = require('./routes/auth');
 app.use('/api/auth', authRoutes);
-      
+   
+
+// app.use('*', (req,res) => {
+//   res.sendFile(path.join(__dirname,'public/index.html'));
+// });
+
 
 module.exports = app;
